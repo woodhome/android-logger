@@ -1,7 +1,7 @@
 package com.sb.logger.Transports;
 
 /**
- * Created by Administrator on 2015/12/15 0015.
+ * Created by WoodHome on 2015/12/15 0015.
  */
 public class FileTransporter implements ITransporter {
 

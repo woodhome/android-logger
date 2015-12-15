@@ -21,12 +21,14 @@ public class RecordGenerator {
     }
 
     public static  LogRecord newRecord(String tag,Object message,StackTraceElement[] traceElements){
-        StackTraceElement element = traceElements[3];
+        StackTraceElement[] realStack = new StackTraceElement[traceElements.length-3];
+        System.arraycopy(traceElements,3,realStack,0,realStack.length);
+        StackTraceElement element = realStack[0];
         LogRecord record = new LogRecord();
         record.setVersion(version);
         record.setTag(tag);
         record.setTimeStp(System.currentTimeMillis());
-        record.setTraceElements(traceElements);
+        record.setTraceElements(realStack);
         record.setLineNumber(element.getLineNumber());
         record.setFileName(element.getFileName());
         record.setClsName(element.getClassName());
