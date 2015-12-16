@@ -5,6 +5,7 @@ import android.content.Context;
 import com.sb.logger.Transports.ConsoleTransporter;
 import com.sb.logger.Transports.ITransporter;
 import com.sb.logger.Transports.LogRecord;
+import com.sb.logger.Transports.NormalFormatter;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ public class Logger {
 
     static ArrayList<ITransporter> transporters = new ArrayList<>();
 
-    public void init(Context context){
+    public static void init(Context context){
         RecordGenerator.init(context);
     }
 
@@ -34,7 +35,7 @@ public class Logger {
     private static void log(String tag,Object message,StackTraceElement[] traceElements){
         LogRecord record = RecordGenerator.newRecord(tag,message,traceElements);
         if(transporters.isEmpty()){
-            addTransport(new ConsoleTransporter());
+            addTransport(new ConsoleTransporter(new NormalFormatter()));
         }
         for (int i = 0; i < transporters.size();i++){
             transporters.get(i).log(record);
