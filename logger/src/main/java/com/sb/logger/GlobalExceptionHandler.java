@@ -1,5 +1,7 @@
 package com.sb.logger;
 
+import com.sb.logger.Transports.LogRecord;
+
 /**
  * Created by WoodHome on 2015/12/16 0016.
  */
@@ -14,7 +16,7 @@ public class GlobalExceptionHandler implements Thread.UncaughtExceptionHandler {
 
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
-        Logger.log("RuntimeError",ex.getMessage(),ex.getStackTrace());
+        Logger.log("RuntimeError",ex.getMessage(),ex.getStackTrace(), LogRecord.LogLevel.ERROR);
         mDefaultHandler.uncaughtException(thread,ex);
     }
 }

@@ -20,15 +20,14 @@ public class RecordGenerator {
         version = packageInfo.versionName;
     }
 
-    public static  LogRecord newRecord(String tag,Object message,StackTraceElement[] traceElements){
-        StackTraceElement[] realStack = new StackTraceElement[traceElements.length-3];
-        System.arraycopy(traceElements,3,realStack,0,realStack.length);
-        StackTraceElement element = realStack[0];
+    public static  LogRecord newRecord(String tag,Object message,StackTraceElement[] traceElements,LogRecord.LogLevel level){
+        StackTraceElement element = traceElements[0];
         LogRecord record = new LogRecord();
+        record.setLevel(level);
         record.setVersion(version);
         record.setTag(tag);
         record.setTimeStp(System.currentTimeMillis());
-        record.setTraceElements(realStack);
+        record.setTraceElements(traceElements);
         record.setLineNumber(element.getLineNumber());
         record.setFileName(element.getFileName());
         record.setClsName(element.getClassName());

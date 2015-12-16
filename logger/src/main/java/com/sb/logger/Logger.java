@@ -23,20 +23,58 @@ public class Logger {
         RecordGenerator.init(context);
     }
 
-    public static void log(String tag,Object message){
-        log(tag, message, Thread.currentThread().getStackTrace());
+    public static  void e(String tag ,Object message){
+        log(tag,message, LogRecord.LogLevel.ERROR);
     }
 
-    public static void log(Object message){
-        log("",message,Thread.currentThread().getStackTrace());
+    public static void e(Object message){
+        log(message, LogRecord.LogLevel.ERROR);
+    }
+
+    public static  void i(String tag ,Object message){
+        log(tag,message, LogRecord.LogLevel.INFO);
+    }
+
+    public static void i(Object message){
+        log(message, LogRecord.LogLevel.ERROR);
+    }
+
+    public static  void d(String tag ,Object message){
+        log(tag,message, LogRecord.LogLevel.DEBUG);
+    }
+
+    public static void d(Object message){
+        log(message, LogRecord.LogLevel.DEBUG);
+    }
+
+    public static  void w(String tag ,Object message){
+        log(tag,message, LogRecord.LogLevel.WARNING);
+    }
+
+    public static void w(Object message){
+        log(message, LogRecord.LogLevel.WARNING);
+    }
+
+    private static void log(String tag,Object message,LogRecord.LogLevel level){
+        StackTraceElement[] traceElements = Thread.currentThread().getStackTrace();
+        StackTraceElement[] realStack = new StackTraceElement[traceElements.length-4];
+        System.arraycopy(traceElements,4,realStack,0,realStack.length);
+        log(tag, message, realStack,level);
+    }
+
+    private static void log(Object message,LogRecord.LogLevel level){
+        StackTraceElement[] traceElements = Thread.currentThread().getStackTrace();
+        StackTraceElement[] realStack = new StackTraceElement[traceElements.length-4];
+        System.arraycopy(traceElements,4,realStack,0,realStack.length);
+        log("", message, realStack,level);
     }
 
     public static void addTransport(ITransporter transporter){
         transporters.add(transporter);
     }
 
-    public static void log(String tag,Object message,StackTraceElement[] traceElements){
-        LogRecord record = RecordGenerator.newRecord(tag,message,traceElements);
+    protected static void log(String tag,Object message,StackTraceElement[] traceElements,LogRecord.LogLevel level){
+        LogRecord record = RecordGenerator.newRecord(tag,message,traceElements,level);
         if(transporters.isEmpty()){
             addTransport(new ConsoleTransporter(new NormalFormatter()));
         }

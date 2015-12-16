@@ -4,6 +4,22 @@ package com.sb.logger.Transports;
  * Created by WoodHome on 2015/12/15 0015.
  */
 public class LogRecord {
+    public enum LogLevel{
+        INFO("info"),
+        DEBUG("debug"),
+        WARNING("warning"),
+        ERROR("error");
+
+        String description;
+        private LogLevel(String desc){
+            description = desc;
+        }
+        public String getDescription(){
+            return description;
+        }
+    }
+
+    LogLevel level;
     private String fileName;
     private int lineNumber;
     private String version;
@@ -14,6 +30,13 @@ public class LogRecord {
     private StackTraceElement[] traceElements;
     private Object message;
 
+    public LogLevel getLevel() {
+        return level;
+    }
+
+    public void setLevel(LogLevel level) {
+        this.level = level;
+    }
     public String getFileName() {
         return fileName;
     }

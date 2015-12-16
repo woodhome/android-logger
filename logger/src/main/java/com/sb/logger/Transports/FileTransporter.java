@@ -1,6 +1,5 @@
 package com.sb.logger.Transports;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,9 +13,9 @@ import java.util.Date;
 public class FileTransporter implements ITransporter {
 
     String mLogFolderPath;
-    IFormatter mFormatter;
+    Formatter mFormatter;
 
-    public FileTransporter(String logFolderPath,IFormatter formatter){
+    public FileTransporter(String logFolderPath,Formatter formatter){
         mFormatter = formatter;
         mLogFolderPath = logFolderPath;
     }

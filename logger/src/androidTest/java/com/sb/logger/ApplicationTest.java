@@ -9,6 +9,8 @@ import android.test.ApplicationTestCase;
 public class ApplicationTest extends ApplicationTestCase<Application> {
     public ApplicationTest() {
         super(Application.class);
-        Logger.log("hi","im here");
+        Logger.w("hi", this);
+        Logger.i("hi", "im info");
+        Logger.d("hi", "im debug");
     }
 }
