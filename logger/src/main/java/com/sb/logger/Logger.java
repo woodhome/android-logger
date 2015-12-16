@@ -15,6 +15,9 @@ import java.util.ArrayList;
 public class Logger {
 
     static ArrayList<ITransporter> transporters = new ArrayList<>();
+    static {
+        new GlobalExceptionHandler();
+    }
 
     public static void init(Context context){
         RecordGenerator.init(context);
@@ -32,7 +35,7 @@ public class Logger {
         transporters.add(transporter);
     }
 
-    private static void log(String tag,Object message,StackTraceElement[] traceElements){
+    public static void log(String tag,Object message,StackTraceElement[] traceElements){
         LogRecord record = RecordGenerator.newRecord(tag,message,traceElements);
         if(transporters.isEmpty()){
             addTransport(new ConsoleTransporter(new NormalFormatter()));
