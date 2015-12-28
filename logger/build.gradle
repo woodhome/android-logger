@@ -1,5 +1,11 @@
 apply plugin: 'com.android.library'
 
+ext {
+    PUBLISH_GROUP_ID = 'com.sb.logger'
+    PUBLISH_ARTIFACT_ID = 'android-logger'
+    PUBLISH_VERSION = '0.0.2'
+}
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
@@ -23,3 +29,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.0.1'
 }
+
+apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
